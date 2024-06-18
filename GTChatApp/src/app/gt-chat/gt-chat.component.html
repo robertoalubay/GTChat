@@ -1,0 +1,74 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">GT Chat</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="chat-content">
+        <div class="card">
+          <ul class="list-group list-group-flush" *ngFor="let chatMessage of webSocketService.chatMessages">
+            <li class="list-group-item">
+              <strong>{{chatMessage.user}}: &nbsp;</strong>
+              <span>{{chatMessage.message}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+      <form #sendForm="ngForm">
+        <div class="chat-send row">
+          <div class="col-2">
+            <input type="text" class="form-control" name="user" id="input-user" placeholder="Name" ngModel>
+          </div>
+          <div class="col-6">
+            <input type="text" class="form-control" name="message" id="input-message" placeholder="Write Something..." ngModel>
+          </div>
+          <div class="col-2">
+            <button type="submit" class="btn btn-primary" (click)="sendMessage(sendForm)">Send</button>
+          </div>
+          <div class="col-2">
+            <button type="submit" class="btn btn-primary " (click)="sendVote(sendForm)">Suggest</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+    <div class="col-md-6">
+      <div><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suggested List</b></div>
+      <div class="chat-content-restaurant">
+        <div class="card">
+          <ul class="list-group list-group-flush" *ngFor="let chatVote of webSocketService.chatVotes">
+            <li class="list-group-item">
+              <strong>{{chatVote.message}}</strong>
+              <span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+      <form >
+        <div class="chat-vote row">
+          <div class="col-2">
+            <button type="submit" class="btn btn-primary2" (click)="endSession()">End Session</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+</div>
